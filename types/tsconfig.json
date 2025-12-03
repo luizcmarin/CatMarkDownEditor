@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es3",
+        "ignoreDeprecations": "5.0",
+        "strict": true,
+        "noImplicitReturns": true,
+        "noEmit": true
+    },
+    "include": [
+        "catmarkdowneditor.d.ts",
+        "catmarkdowneditor-test.ts"
+    ]
+}

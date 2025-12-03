@@ -1,0 +1,37 @@
+<!--
+* Project: Catfeina/CatMarkDownEditor
+* Github: https://github.com/luizcmarin/CatMarkDownEditor
+* File: cypress/e2e/3-class-prefix/index-no-prefix.html
+*
+* Copyright (c) 2025 Marin. All rights reserved.
+*
+* Authors: Luiz Carlos Marin / Ivete Gielow Marin / Caroline Gielow Marin
+*
+* This file is part of the Catfeina project.
+* Unauthorized reproduction or distribution of this file, or any part thereof, is strictly prohibited.
+*
+* Note: HTML file for class prefix (no prefix) Cypress tests.
+*
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Default</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../dist/catmarkdowneditor.min.css">
+    <script src="../../../dist/catmarkdowneditor.min.js"></script>
+</head>
+
+<body>
+    <textarea id="textarea"></textarea>
+    <script>
+        const catMDE = new CatMarkDownEditor({
+            showIcons: ["table"],
+        });
+    </script>
+</body>
+
+</html>
