@@ -25,10 +25,10 @@
     },
     "devDependencies": {
         "browserify": "^17.0.0",
-        "cypress": "^12.17.4",
+        "cypress": "^15.7.1",
         "eslint": "^8.57.0",
         "eslint-plugin-cypress": "^2.15.1",
-        "gulp": "^4.0.2",
+        "gulp": "^5.0.1",
         "gulp-clean-css": "^4.3.0",
         "gulp-concat": "^2.6.1",
         "gulp-eslint": "^6.0.0",
