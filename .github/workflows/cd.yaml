@@ -1,4 +1,6 @@
 name: CatMarkDownEditor Test & Deploy
+permissions:
+  contents: read
 
 on:
   workflow_dispatch:
