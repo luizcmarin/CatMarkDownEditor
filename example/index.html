@@ -21,15 +21,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Example / Preview</title>
+    <title>CatMarkDownEditor Examples</title>
+    <!-- Carrega o CSS gerado pelo build -->
     <link rel="stylesheet" href="../dist/catmarkdowneditor.min.css">
-    <script src="../dist/catmarkdowneditor.min.js"></script>
+    <!-- Adicione Bootstrap Icons para os ícones da barra de ferramentas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- O CSS movido do index.html para o arquivo externo -->
+    <link rel="stylesheet" href="../src/css/catmarkdowneditor.css">
 </head>
 
 <body>
-    <textarea></textarea>
+    <h1>CatMarkDownEditor Examples</h1>
+
+    <section class="editor-section">
+        <h2>Demo 1: Editor Básico com Barra de Ferramentas no Topo</h2>
+        <textarea id="demo1"># Bem-vindo ao CatMarkDownEditor!
+
+Este é um editor de Markdown simples e fácil de usar.
+
+## Recursos:
+*   **Negrito**
+*   *Itálico*
+*   ~~Riscado~~
+*   Listas:
+    *   Item 1
+    *   Item 2
+*   Links: [Google](https://www.google.com)
+*   Imagens: ![Placeholder](https://via.placeholder.com/150)
+
+Comece a digitar seu Markdown aqui!</textarea>
+    </section>
+
+    <section class="editor-section">
+        <h2>Demo 2: Editor com Autosave e Barra de Ferramentas na Parte Inferior</h2>
+        <textarea id="demo2"># Este editor possui Autosave!
+
+Ele salva automaticamente o conteúdo no `localStorage` a cada 500ms. Tente digitar algo e recarregar a página para ver o conteúdo salvo.
+
+## Listas Numeradas
+1.  Primeiro item.
+2.  Segundo item.
+    1.  Subitem.
+3.  Terceiro item.
+
+## Citação
+> "A imaginação é mais importante que o conhecimento." - Albert Einstein</textarea>
+    </section>
+
+    <section class="editor-section">
+        <h2>Demo 3: Editor sem Barra de Ferramentas e Statusbar</h2>
+        <textarea id="demo3"># Editor Minimalista
+
+Este editor não possui barra de ferramentas nem statusbar, ideal para uma experiência de escrita focada.
+
+Você ainda pode usar atalhos de teclado para formatação.
+
+---
+### Código
+```javascript
+function helloWorld() {
+    console.log("Hello, World!");
+}
+helloWorld();
+```</textarea>
+    </section>
+
+    <section class="editor-section">
+        <h2>Demo 4: Editor com Opções Personalizadas</h2>
+        <textarea id="demo4"># Editor Personalizado
+
+Aqui você pode ver um editor com um conjunto de botões de barra de ferramentas diferente e sem numeração de linhas.
+
+*   **Atenção**: Este editor não tem numeração de linhas.
+*   **Foco**: Apenas os botões essenciais estão presentes.
+
+## Tabela Simples
+| Cabeçalho 1 | Cabeçalho 2 |
+|-------------|-------------|
+| Conteúdo 1  | Conteúdo 2  |
+| Conteúdo 3  | Conteúdo 4  |</textarea>
+    </section>
+
+    <!-- Carrega o JavaScript UMD gerado pelo build -->
+    <script src="../dist/catmarkdowneditor.min.js"></script>
     <script>
-        const catMDE = new CatMarkDownEditor();
+        // A classe CatMarkDownEditor agora é global, não precisa de import
+
+        // Configuração completa da barra de ferramentas para os demos
+        const fullToolbarConfig = [
+            'bold', 'italic', 'strikethrough', '|',
+            'heading', 'quote', '|',
+            'unordered-list', 'ordered-list', 'task-list', '|',
+            'inline-code', 'code-block', 'horizontal-rule', '|',
+            'link', 'image', '|',
+            'table', 'footnote', '|',
+            'preview', 'side-by-side', 'fullscreen', '|',
+            'guide',
+        ];
+
+        // Demo 1: Editor Básico com Barra de Ferramentas no Topo (padrão)
+        new CatMarkDownEditor({
+            element: document.getElementById('demo1'),
+            initialValue: document.getElementById('demo1').value,
+            lineNumbers: true,
+            autosave: { enabled: false },
+            toolbarPosition: 'top',
+            statusbar: ['lines', 'words', 'cursor'],
+            toolbar: fullToolbarConfig,
+        });
+
+        // Demo 2: Editor com Autosave e Barra de Ferramentas na Parte Inferior
+        new CatMarkDownEditor({
+            element: document.getElementById('demo2'),
+            initialValue: document.getElementById('demo2').value,
+            lineNumbers: true,
+            autosave: {
+                enabled: true,
+                delay: 500,
+                uniqueId: 'CatMarkDownEditorDemo2Content'
+            },
+            toolbarPosition: 'bottom',
+            statusbar: ['lines', 'words', 'cursor'],
+            toolbar: fullToolbarConfig,
+        });
+
+        // Demo 3: Editor sem Barra de Ferramentas e Statusbar
+        new CatMarkDownEditor({
+            element: document.getElementById('demo3'),
+            initialValue: document.getElementById('demo3').value,
+            lineNumbers: true,
+            autosave: { enabled: false },
+            toolbarPosition: 'none',
+            statusbar: [], // Oculta a statusbar
+            toolbar: fullToolbarConfig,
+        });
+
+        // Demo 4: Editor com Opções Personalizadas (toolbar reduzida, sem numeração de linhas)
+        new CatMarkDownEditor({
+            element: document.getElementById('demo4'),
+            initialValue: document.getElementById('demo4').value,
+            lineNumbers: false, // Sem numeração de linhas
+            autosave: { enabled: false },
+            toolbarPosition: 'top',
+            toolbar: [ // Barra de ferramentas personalizada
+                'bold', 'italic', '|',
+                'heading', 'quote', '|',
+                'link', 'image',
+                'table', 'footnote',
+            ],
+            statusbar: ['lines', 'words', 'cursor'], // Mantém a barra de status completa
+        });
     </script>
 </body>
 

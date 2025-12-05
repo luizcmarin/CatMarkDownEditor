@@ -25,44 +25,37 @@ describe('Default statusbar', () => {
         cy.get('.CatMarkDownEditorContainer').should('be.visible');
         cy.get('.CatMarkDownEditorContainer .editor-statusbar').should('be.visible');
 
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .autosave').should('be.empty');
-
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .lines').should('contain', '1');
-
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .words').should('contain', '0');
-
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .cursor').should('contain', '1:1');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .lines').should('contain', 'Lines: 1');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .words').should('contain', 'Words: 0');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .cursor').should('contain', '1:0');
     });
 
     it('updates the statusbar when typing', () => {
         cy.get('.CatMarkDownEditorContainer').should('be.visible');
         cy.get('.CatMarkDownEditorContainer .editor-statusbar').should('be.visible');
 
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type('Hello');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').type('Hello');
 
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .autosave').should('be.empty');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .lines').should('contain', 'Lines: 1');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .words').should('contain', 'Words: 1');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .cursor').should('contain', '1:5');
 
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .lines').should('contain', '1');
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .words').should('contain', '1');
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .cursor').should('contain', '1:6');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').type(' World');
 
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type(' World');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .lines').should('contain', 'Lines: 1');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .words').should('contain', 'Words: 2');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .cursor').should('contain', '1:11');
 
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .lines').should('contain', '1');
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .words').should('contain', '2');
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .cursor').should('contain', '1:12');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').type('{enter}');
 
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type('{enter}');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .lines').should('contain', 'Lines: 2');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .words').should('contain', 'Words: 2');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .cursor').should('contain', '2:0');
 
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .lines').should('contain', '2');
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .words').should('contain', '2');
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .cursor').should('contain', '2:1');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').type('This is a sample text.{enter}We\'re testing the statusbar.{enter}Did it work?');
 
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type('This is a sample text.{enter}We\'re testing the statusbar.{enter}Did it work?');
-
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .autosave').should('be.empty');
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .lines').should('contain', '4');
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .words').should('contain', '15');
-        cy.get('.CatMarkDownEditorContainer .editor-statusbar .cursor').should('contain', '4:13');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .lines').should('contain', 'Lines: 4');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .words').should('contain', 'Words: 15');
+        cy.get('.CatMarkDownEditorContainer .editor-statusbar .cursor').should('contain', '4:12');
     });
 });

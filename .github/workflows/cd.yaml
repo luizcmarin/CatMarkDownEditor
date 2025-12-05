@@ -18,9 +18,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js v24 (LTS Ativa)
+        uses: actions/setup-node@v4
         with:
-          node-version: current
+          node-version: 24 # Padronizado para a LTS Ativa
 
       - uses: actions/checkout@v4
 
@@ -33,7 +34,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ '14', '16', '18' ]
+        # Adicionada v20 para cobertura total de LTS suportadas
+        node-version: [ '20', '22', '24', '25' ]
 
     steps:
       - uses: actions/setup-node@v4
@@ -68,9 +70,10 @@ jobs:
     if: github.event_name == 'push'
 
     steps:
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js v24 (LTS Ativa)
+        uses: actions/setup-node@v4
         with:
-          node-version: current
+          node-version: 24 # Padronizado para a LTS Ativa
 
       - uses: actions/checkout@v4
 

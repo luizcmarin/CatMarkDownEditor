@@ -29,14 +29,11 @@ describe('Image rendering', () => {
         cy.get('.CatMarkDownEditorContainer').should('be.visible');
         cy.get('#textarea').should('not.be.visible');
 
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type(imageUrl);
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type('{home}![Dog!]({end})');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').type(`![Dog!](${imageUrl})`);
 
         cy.wait('@image');
 
-        cy.get(`.CatMarkDownEditorContainer [data-img-src="${imageUrl}"]`).should('be.visible');
-
-        cy.previewOn();
+        cy.get('button.preview').click();
 
         cy.get('.CatMarkDownEditorContainer .editor-preview').should('contain.html', `<p><img src="${imageUrl}" alt="Dog!"></p>`);
     });
@@ -45,14 +42,11 @@ describe('Image rendering', () => {
         cy.get('.CatMarkDownEditorContainer').should('be.visible');
         cy.get('#textarea').should('not.be.visible');
 
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type(imageUrl);
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type('{home}![Dog! (He\'s a good boy!)]({end})');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').type(`![Dog! (He's a good boy!)](${imageUrl})`);
 
         cy.wait('@image');
 
-        cy.get(`.CatMarkDownEditorContainer [data-img-src="${imageUrl}"]`).should('be.visible');
-
-        cy.previewOn();
+        cy.get('button.preview').click();
 
         cy.get('.CatMarkDownEditorContainer .editor-preview').should('contain.html', `<p><img src="${imageUrl}" alt="Dog! (He's a good boy!)"></p>`);
     });

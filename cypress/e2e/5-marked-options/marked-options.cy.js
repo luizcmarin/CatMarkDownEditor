@@ -25,9 +25,9 @@ describe('Marked options', () => {
         cy.get('.CatMarkDownEditorContainer').should('be.visible');
         cy.get('#textarea').should('not.be.visible');
 
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type('# Title{enter}');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').type('# Title{enter}');
 
-        cy.previewOn();
+        cy.get('button.preview').click();
 
         cy.get('.CatMarkDownEditorContainer .editor-preview').should('contain.html', '<h1 id="header-prefix-title">Title</h1>');
     });

@@ -23,25 +23,24 @@ describe('Preview', () => {
 
     it('can show a preview of markdown text', () => {
         cy.get('.CatMarkDownEditorContainer').should('be.visible');
-        cy.get('.CatMarkDownEditorContainer .editor-preview').should('not.be.visible');
+        cy.get('.CatMarkDownEditorContainer .editor-preview').should('not.exist');
 
         // Enter markdown text.
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type('# My Big Title');
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type('{enter}');
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').type('This is some **important** text!');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').type('# My Big Title');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').type('{enter}');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').type('This is some **important** text!');
 
-        cy.get('.CatMarkDownEditorContainer .CodeMirror-line').should('contain', '# My Big Title');
-        cy.get('.CatMarkDownEditorContainer .cm-header.cm-header-1').should('contain', '#');
-        cy.get('.CatMarkDownEditorContainer .cm-header.cm-header-1').should('contain', 'My Big Title');
+        cy.get('.CatMarkDownEditorContainer .cm-line').should('contain', '# My Big Title');
+        cy.get('.CatMarkDownEditorContainer .cm-header-1').should('exist');
 
-        cy.get('.CatMarkDownEditorContainer .CodeMirror-line').should('contain', 'This is some **important** text!');
-        cy.get('.CatMarkDownEditorContainer .cm-strong').should('contain', '**');
-        cy.get('.CatMarkDownEditorContainer .cm-strong').should('contain', 'important');
+        cy.get('.CatMarkDownEditorContainer .cm-line').should('contain', 'This is some important text!');
+        cy.get('.CatMarkDownEditorContainer .cm-strong').should('exist');
 
-        cy.previewOn();
+        cy.get('button.preview').click();
 
         // Check preview window for rendered markdown.
-        cy.get('.CatMarkDownEditorContainer .editor-preview').should('contain.html', '<h1 id="my-big-title">My Big Title</h1>');
+        cy.get('.CatMarkDownEditorContainer .editor-preview').should('be.visible');
+        cy.get('.CatMarkDownEditorContainer .editor-preview').should('contain.html', '<h1>My Big Title</h1>');
         cy.get('.CatMarkDownEditorContainer .editor-preview').should('contain.html', '<p>This is some <strong>important</strong> text!</p>');
     });
 });

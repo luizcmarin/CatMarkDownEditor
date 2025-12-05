@@ -26,8 +26,8 @@ describe('Default editor', () => {
         cy.get('#textarea').should('not.be.visible');
 
         cy.get('.CatMarkDownEditorContainer .editor-toolbar').should('be.visible');
-        cy.get('.CatMarkDownEditorContainer .CodeMirror').should('be.visible');
-        cy.get('.CatMarkDownEditorContainer .editor-preview').should('not.be.visible');
+        cy.get('.CatMarkDownEditorContainer .cm-editor').should('be.visible');
+        cy.get('.CatMarkDownEditorContainer .editor-preview').should('not.exist');
         cy.get('.CatMarkDownEditorContainer .editor-statusbar').should('be.visible');
     });
 });

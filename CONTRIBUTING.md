@@ -42,7 +42,7 @@ Please make sure any code you submit is compliant and compatible with this repos
 1. Clone your fork: `git clone https://github.com/YOUR_USERNAME/CatMarkDownEditor.git`.
 1. Add the original repository as remote to keep it up-to-date: `git remote add upstream https://github.com/luizcmarin/CatMarkDownEditor.git`.
 1. Fetch the latest changes from upstream: `git fetch upstream`.
-1. Run `npm ci` to install the required dependencies.
+1. Run `npm install` to install the required dependencies.
 1. Create a new branch to work on: `git checkout -b MyNewFeatureName`.
 1. Write your awesome improvement and commit your work.
 1. Make sure your changes comply with the established code and tests succeed: `npm run test`.
