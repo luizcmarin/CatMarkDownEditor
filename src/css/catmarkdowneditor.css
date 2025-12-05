@@ -11,24 +11,20 @@
  * Unauthorized reproduction or distribution of this file, or any part thereof, is strictly prohibited.
  */
 
-/* Estilos gerais do container */
 .CatMarkDownEditorContainer {
     font-family: Arial, sans-serif;
-    box-shadow: none;
-    border-radius: 0;
-    width: 100%;
-    margin: 0;
+    /* Removido borda aqui, será aplicada ao editor e preview individualmente */
 }
 
-/* --- Toolbar --- */
 .editor-toolbar {
     background-color: #f0f0f0;
     padding: 5px;
-    border: 1px solid #ccc;
-    border-bottom: none;
-    border-radius: 4px 4px 0 0;
-    display: flex;
-    flex-wrap: wrap;
+    border: 1px solid #ccc; /* Borda completa para a toolbar */
+    border-bottom: none; /* Removido para evitar borda dupla com o editor */
+    border-radius: 4px 4px 0 0; /* Cantos arredondados no topo */
+    display: flex; /* Para alinhar os botões */
+    flex-wrap: nowrap; /* Impede que os botões quebrem a linha */
+    overflow-x: auto; /* Adiciona rolagem horizontal se necessário */
     align-items: center;
 }
 
@@ -42,18 +38,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s; /* Adicionado transição */
 }
 
 .editor-toolbar button:hover {
     background-color: #e0e0e0;
-}
-
-/* Estilo para botão ativo/selecionado */
-.editor-toolbar button.active {
-    background-color: #d1d1d1;
-    border-color: #b0b0b0;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .editor-toolbar .separator {
@@ -61,83 +49,84 @@
     color: #ccc;
 }
 
-/* --- Statusbar --- */
 .editor-statusbar {
     background-color: #f0f0f0;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-top: none;
-    border-radius: 0 0 4px 4px;
+    padding: 5px 10px; /* Adicionado padding horizontal */
+    border: 1px solid #ccc; /* Borda completa para a statusbar */
+    border-top: none; /* Removido para evitar borda dupla com o editor */
+    border-radius: 0 0 4px 4px; /* Cantos arredondados na base */
     font-size: 0.8em;
     display: flex;
     justify-content: flex-end;
-    gap: 15px;
+    gap: 15px; /* Espaçamento entre os itens da statusbar */
 }
 
-/* --- Editor (CodeMirror) --- */
+.editor-statusbar span {
+    /* margin-left: 15px; Removido, usando gap no flexbox */
+}
+
 .cm-editor {
     border-radius: 0;
-    border: 1px solid #ced4da;
-    border-top: none;
-    border-bottom: none;
+    border: 1px solid #ced4da; /* Adiciona a borda de volta ao editor */
+    border-top: none; /* Remove borda superior se a toolbar estiver no topo */
+    border-bottom: none; /* Remove borda inferior se a statusbar estiver embaixo */
 }
 
-/* Lógica de Borda do Editor (cm-editor) */
-
-/* Caso a toolbar esteja embaixo */
 .CatMarkDownEditorContainer.toolbar-bottom .cm-editor {
-    border-top: 1px solid #ced4da;
+    border-top: 1px solid #ced4da; /* Adiciona borda superior se a toolbar estiver embaixo */
     border-bottom: none;
 }
 
-/* Caso a statusbar esteja no topo */
 .CatMarkDownEditorContainer.statusbar-top .cm-editor {
-    border-bottom: 1px solid #ced4da;
+    border-bottom: 1px solid #ced4da; /* Adiciona borda inferior se a statusbar estiver no topo */
     border-top: none;
 }
 
-/* Caso a toolbar esteja desativada */
 .CatMarkDownEditorContainer.toolbar-none .cm-editor {
     border-top: 1px solid #ced4da;
 }
 
-/* Caso a statusbar esteja desativada */
 .CatMarkDownEditorContainer.statusbar-none .cm-editor {
     border-bottom: 1px solid #ced4da;
 }
 
+/* Estilos gerais do container */
+.CatMarkDownEditorContainer {
+    box-shadow: none; /* Remove a sombra duplicada */
+    border-radius: 0; /* Remove o border-radius duplicado */
+    width: 100%; /* Ocupa a largura total da seção */
+    margin: 0; /* Remove margens para se ajustar à seção */
+}
 
-/* --- Modo Side-by-Side (Lado a Lado) --- */
+/* Estilos para o modo side-by-side */
 .CatMarkDownEditorContainer.view-mode-side-by-side {
     display: flex;
-    flex-wrap: wrap;
-    border: 1px solid #ccc;
+    flex-wrap: wrap; /* Para permitir quebra de linha se necessário */
+    border: 1px solid #ccc; /* Borda para o container no modo side-by-side */
     border-radius: 4px;
 }
 
 .CatMarkDownEditorContainer.view-mode-side-by-side .cm-editor,
 .CatMarkDownEditorContainer.view-mode-side-by-side .editor-preview {
     width: 50%;
-    min-height: 300px;
-    border: none;
+    min-height: 300px; /* Garante altura mínima */
+    border: none; /* Remove bordas individuais, a borda será do container */
     border-radius: 0;
 }
 
 .CatMarkDownEditorContainer.view-mode-side-by-side .cm-editor {
-    border-right: 1px solid #ced4da;
+    border-right: 1px solid #ced4da; /* Separador entre editor e preview */
 }
 
 .CatMarkDownEditorContainer.view-mode-side-by-side .editor-toolbar,
 .CatMarkDownEditorContainer.view-mode-side-by-side .editor-statusbar {
-    width: 100%;
+    width: 100%; /* Toolbar e statusbar ocupam a largura total */
     border-left: none;
     border-right: none;
     border-radius: 0;
 }
 
-/* --- Modo de Visualização Normal (Editor-only, Preview-only) --- */
-
-/* Ajustes de borda para o container no modo normal (completa o box) */
+/* Ajustes de borda para o container no modo normal */
 .CatMarkDownEditorContainer:not(.view-mode-side-by-side):not(.view-mode-preview-only) .editor-toolbar {
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
@@ -155,23 +144,9 @@
     border-right: 1px solid #ced4da;
 }
 
-/* Apenas Editor */
-.CatMarkDownEditorContainer.view-mode-editor-only .editor-preview {
-    display: none;
-}
 
-/* Apenas Preview */
-.CatMarkDownEditorContainer.view-mode-preview-only .cm-editor {
-    display: none;
-}
-
-.CatMarkDownEditorContainer.view-mode-preview-only .editor-preview {
-    width: 100%;
-}
-
-
-/* --- Modo Fullscreen --- */
-.CatMarkDownEditorContainer.fullscreen {
+/* Estilos para fullscreen */
+.CatMarkDownEditorContainer.fullscreen { /* Aplica a classe fullscreen ao container principal */
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
@@ -181,10 +156,10 @@
     z-index: 9999 !important;
     display: flex !important;
     flex-direction: column !important;
-    margin: 0 !important;
-    max-width: none !important;
-    border-radius: 0 !important;
-    border: none !important;
+    margin: 0 !important; /* Remove margens que podem impedir o fullscreen */
+    max-width: none !important; /* Remove max-width que pode impedir o fullscreen */
+    border-radius: 0 !important; /* Remove border-radius no fullscreen */
+    border: none !important; /* Remove bordas no fullscreen */
 }
 
 .CatMarkDownEditorContainer.fullscreen .editor-toolbar {
@@ -197,7 +172,7 @@
 .CatMarkDownEditorContainer.fullscreen .editor-preview {
     flex-grow: 1 !important;
     height: auto !important;
-    min-height: 0 !important;
+    min-height: 0 !important; /* Garante que o min-height não interfira no fullscreen */
     border-radius: 0 !important;
     border: none !important;
 }
@@ -209,10 +184,23 @@
 }
 
 .CatMarkDownEditorContainer.fullscreen.view-mode-side-by-side .cm-editor {
-    border-right: 1px solid #ced4da !important;
+    border-right: 1px solid #ced4da !important; /* Mantém o separador no modo side-by-side fullscreen */
 }
 
-/* --- Estilos do Preview --- */
+/* Novos estilos para os modos de visualização */
+.CatMarkDownEditorContainer.view-mode-editor-only .editor-preview {
+    display: none;
+}
+
+.CatMarkDownEditorContainer.view-mode-preview-only .cm-editor {
+    display: none;
+}
+
+.CatMarkDownEditorContainer.view-mode-preview-only .editor-preview {
+    width: 100%;
+}
+
+/* Estilo para blockquote */
 .editor-preview blockquote {
     margin: 0 0 1em;
     padding: 0.5em 10px;
@@ -220,8 +208,7 @@
     border-left: 0.25em solid #dfe2e5;
 }
 
-/* --- Estilos de Exemplo (body, editor-section) - Devem estar em um arquivo separado (ex: index.css) --- */
-/* Estes estilos não afetam o editor, mas sim o contexto em que ele é usado. */
+/* CSS movido do index.html */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -251,10 +238,44 @@ h2 {
 }
 textarea {
     width: 100%;
-    height: 250px;
+    height: 250px; /* Altura inicial para o textarea */
     border: 1px solid #ddd;
     padding: 10px;
     box-sizing: border-box;
     margin-bottom: 10px;
-    display: block;
+    display: block; /* Garante que o textarea seja um bloco para ser ocultado */
+}
+.CatMarkDownEditorContainer {
+    box-shadow: none; /* Remove a sombra duplicada */
+    border-radius: 0; /* Remove o border-radius duplicado */
+    width: 100%; /* Ocupa a largura total da seção */
+    margin: 0; /* Remove margens para se ajustar à seção */
+}
+.editor-toolbar {
+    border-radius: 4px 4px 0 0;
+    border-bottom: none;
+}
+.editor-statusbar {
+    border-radius: 0 0 4px 4px;
+    border-top: none;
+}
+.CatMarkDownEditorContainer .cm-editor {
+    border-radius: 0;
+    border: 1px solid #ced4da; /* Adiciona a borda de volta ao editor */
+    border-top: none; /* Remove borda superior se a toolbar estiver no topo */
+    border-bottom: none; /* Remove borda inferior se a statusbar estiver embaixo */
+}
+.CatMarkDownEditorContainer.toolbar-bottom .cm-editor {
+    border-top: 1px solid #ced4da; /* Adiciona borda superior se a toolbar estiver embaixo */
+    border-bottom: none;
+}
+.CatMarkDownEditorContainer.statusbar-top .cm-editor {
+    border-bottom: 1px solid #ced4da; /* Adiciona borda inferior se a statusbar estiver no topo */
+    border-top: none;
+}
+.CatMarkDownEditorContainer.toolbar-none .cm-editor {
+    border-top: 1px solid #ced4da;
+}
+.CatMarkDownEditorContainer.statusbar-none .cm-editor {
+    border-bottom: 1px solid #ced4da;
 }

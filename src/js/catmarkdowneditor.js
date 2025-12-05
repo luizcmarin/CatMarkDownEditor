@@ -265,7 +265,7 @@ class CatMarkDownEditor {
                 toolbarElement.appendChild(separator);
             } else {
                 const button = document.createElement('button');
-                button.className = item;
+                button.className = '';
                 button.title = this.i18n.toolbar[item] || item;
                 const iconClass = iconMap[item] || '';
                 button.innerHTML = `<i class="bi bi-${iconClass}"></i>`;
